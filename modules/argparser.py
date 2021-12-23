@@ -73,5 +73,9 @@ class TracerouteArgParse:
             if parameters.p > -1:
                 raise ValueError('ICMP protocol cannot have port')
 
+        if not port:
+            if not (0 < parameters.p < 65536):
+                raise ValueError('Port should be less 65536 and more 0')
+
         return _DataArgs(parameters.ip, parameters.protocol.upper(), parameters.t, port if port else parameters.p,
                          parameters.n)
